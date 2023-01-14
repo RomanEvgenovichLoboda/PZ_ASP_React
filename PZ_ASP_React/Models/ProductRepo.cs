@@ -15,5 +15,22 @@
             context.SaveChanges();
             return "Added";
         }
+        public string ApdateProduct(Product product)
+        {
+            context.Products.Update(product);
+            context.SaveChanges();
+            return "Apdated";
+        }
+        public string Remove(int id)
+        {
+            Product? product = context.Products.Find(id);
+            if (product != null)
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+                return "Delleted";
+            }
+            else return "Not Delleted";
+        }
     }
 }

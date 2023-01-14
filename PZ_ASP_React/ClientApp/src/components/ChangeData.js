@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/bootstrap.min.css';
 
 export class ChangeData extends Component {
   static displayName = ChangeData.name;
@@ -15,7 +16,7 @@ export class ChangeData extends Component {
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    this.populateData();
   }
   addProduct(){
     // alert(this.state.product.imageUrl);
@@ -34,7 +35,7 @@ export class ChangeData extends Component {
     };
     console.log(data);
     fetch('product/PostProduct',data);
-
+    this.populateData();
   }
   changeName(event){
     // this.setState({...this.state.product,mame: event.target.value});
@@ -83,15 +84,21 @@ export class ChangeData extends Component {
   }
   static renderForecastsTable(forecasts) {
     return (
-      <div>
+      <div className='bg-dark'>
         {forecasts.map(forecast =>
-            <div key={forecast.id}>
+            <div className='card d-inline-flex m-1 p-2 font-monospace' key={forecast.id}>
               {/* <td>{forecast.id}</td> */}
-              <input value={forecast.name}></input>
-              <input value={forecast.price}></input>
-              <input value={forecast.header}></input>
-              <input value={forecast.description}></input>
-              <input value={forecast.imageUrl}></input>
+              {/* <div className='card d-inline-flex m-1 p-2 font-monospace'> */}
+              {/* <img className='card-img-top'></img> */}
+              <input className='form-control m-1' defaultValue={forecast.name}></input>
+              <input className='form-control m-1' type='number' defaultValue={forecast.price}></input>
+              <input className='form-control m-1'  onChange={this.changeHeader} defaultValue={forecast.header}></input>
+              <input className='form-control m-1' defaultValue={forecast.description}></input>
+              <input className='form-control m-1' defaultValue={forecast.imageUrl}></input>
+              <button className='btn btn-outline-primary'>Edit</button>
+
+              {/* </div> */}
+              
             </div>
           )}
 
@@ -131,19 +138,19 @@ export class ChangeData extends Component {
       : ChangeData.renderForecastsTable(this.state.forecasts);
 
     return (
-      <div>
-        <div>
+      <div className='row'>
+        <div className='card  d-inline-block m-1 p-2 font-monospace'>
           <label>Name</label>
-          <input onChange={this.changeName} value={this.state.product.name} name='name'></input>
+          <input className='form-control' onChange={this.changeName} value={this.state.product.name} name='name'></input>
           <label>Price</label>
-          <input type='number' onChange={this.changePrice} value={this.state.product.price} name ='price' ></input>
+          <input className='form-control' type='number' onChange={this.changePrice} value={this.state.product.price} name ='price' ></input>
           <label>Header</label>
-          <input onChange={this.changeHeader} value={this.state.product.header} name ='hdr'></input>
+          <input className='form-control' onChange={this.changeHeader} value={this.state.product.header} name ='hdr'></input>
           <label>Descript</label>
-          <input onChange={this.changeDescript} value={this.state.product.description} name ='dscr'></input>
+          <input className='form-control' onChange={this.changeDescript} value={this.state.product.description} name ='dscr'></input>
           <label>ImgUrl</label>
-          <input onChange={this.changeUrl} value={this.state.product.imageUrl} name ='url'></input>
-          <button onClick={this.addProduct}>Add</button>
+          <input className='form-control' onChange={this.changeUrl} value={this.state.product.imageUrl} name ='url'></input>
+          <button className='btn btn-outline-primary' onClick={this.addProduct}>Add</button>
         </div>
         {contents}
       </div>
@@ -152,7 +159,7 @@ export class ChangeData extends Component {
 
  
 
-  async populateWeatherData() {
+  async populateData() {
     const response = await fetch('product/GetAll');
     const data = await response.json();
     this.setState({ forecasts: data, loading: false });
