@@ -14,6 +14,7 @@ export class ChangeData extends Component {
     this.changeHeader = this.changeHeader.bind(this);
     this.changeDescript = this.changeDescript.bind(this);
     this.changeUrl = this.changeUrl.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
@@ -84,9 +85,25 @@ export class ChangeData extends Component {
       }
   }))
   }
+
+  async search(){
+    let name = document.getElementById('srch').value;
+    let response= null;
+    // alert(name);
+    if(name!=""){
+      response = await fetch('product/GetByName?name=' + name,{method: 'GET'});
+    }
+    else{
+      response = await fetch('product/GetAll');
+    }
+    const data = await response.json();
+    this.setState({ forecasts: data, loading: false });
+  }
+
   static renderForecastsTable(forecasts) {
     return (
-      <div className='bg-dark'>
+      <div className=' d-flex flex-wrap justify-content-center'>
+        
         {forecasts.map(forecast =>
             <Product product={forecast} key={forecast.id}></Product>
           )}
@@ -104,7 +121,7 @@ export class ChangeData extends Component {
       <div className='row'>
         <h1>Add and Change Products</h1>
         <p>This component demonstrates fetching data from the server.</p>
-        <div className='card  d-inline-block m-1 p-2 font-monospace'>
+        <div className='card m-1 p-2 font-monospace'>
           <label>Name</label>
           <input className='form-control' onChange={this.changeName} value={this.state.product.name} name='name'></input>
           <label>Price</label>
@@ -120,6 +137,9 @@ export class ChangeData extends Component {
           </div>
           
         </div>
+        <div className='w-100 d-flex justify-content-center m-3'>
+            <input onChange={this.search} id='srch' className=' form-control w-75' placeholder='Search By Name'></input>
+          </div>
         {contents}
       </div>
     );

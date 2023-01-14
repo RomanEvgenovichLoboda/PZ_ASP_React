@@ -16,7 +16,7 @@ namespace PZ_ASP_React.Controllers
         //    productWorck = new ProductWorck();
         //}
         [HttpGet("GetByName")]
-        public Product Search(string name) => productRepo.Get(name);
+        public IEnumerable<Product> Search(string name) => productRepo.Get(name);
 
         [HttpGet("GetAll")]
         public IEnumerable<Product> Get() //=> productWorck.productRepo.GetAll();

@@ -7,7 +7,7 @@
         {
             this.context = context;
         }
-        public Product Get(string name) => context.Products.FirstOrDefault(x => x.Name == name);
+        public IEnumerable<Product> Get(string name) => context.Products.Where(x => x.Name.Contains(name));
         public IEnumerable<Product> GetAll() => context.Products;
         public string AddProduct(Product product) 
         {
