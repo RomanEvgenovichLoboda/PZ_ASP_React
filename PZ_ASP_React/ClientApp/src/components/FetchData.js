@@ -14,53 +14,18 @@ export class FetchData extends Component {
 
   static renderForecastsTable(forecasts) {
     return (
-      <div className='bg-dark'>
+      <div >
         {forecasts.map(forecast =>
-            <div className='card d-inline-block m-2 p-2 font-monospace'  key={forecast.id}>
-              {/* <td>{forecast.id}</td> */}
-              {/* <div className='card d-inline-flex m-1 p-2 font-monospace'> */}
+            <div className='card d-inline-block m-2 p-2 font-monospace text-bg-dark bg-opacity-75'  key={forecast.id}>
               <img className='card-img-top'  style={{width: '150px',height: '200px'}} src={forecast.imageUrl}></img>
               <p>{forecast.name}</p>
-              <p>{forecast.price}</p>
+              <p>{forecast.price} hrn</p>
               <p>{forecast.header}</p>
               <p>{forecast.description}</p>
-              {/* <p>{forecast.imageUrl}</p> */}
-              {/* <button className='btn btn-outline-primary'>Edit</button> */}
-
-              {/* </div> */}
-              
+              <button onClick={this.update} className='btn btn-outline-warning w-100'>Buy</button>
             </div>
           )}
-
-
-
       </div>
-
-
-      // <table className="table table-striped" aria-labelledby="tableLabel">
-      //   <thead>
-      //     <tr>
-      //     <th>Id</th>
-      //       <th>Name</th>
-      //       <th>Price</th>
-      //       <th>Header</th>
-      //       <th>Discript</th>
-      //       <th>ImageUrl</th>
-      //     </tr>
-      //   </thead>
-      //   <tbody>
-      //     {forecasts.map(forecast =>
-      //       <tr key={forecast.id}>
-      //         <td>{forecast.id}</td>
-      //         <td>{forecast.name}</td>
-      //         <td>{forecast.price}</td>
-      //         <td>{forecast.header}</td>
-      //         <td>{forecast.description}</td>
-      //         <td>{forecast.imageUrl}</td>
-      //       </tr>
-      //     )}
-      //   </tbody>
-      // </table>
     );
   }
 
@@ -71,7 +36,7 @@ export class FetchData extends Component {
 
     return (
       <div>
-        <h1 id="tableLabel">Weather forecast</h1>
+        <h1>Products</h1>
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>

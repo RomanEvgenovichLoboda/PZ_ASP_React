@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/bootstrap.min.css';
+import { Product } from './Product';
 
 export class ChangeData extends Component {
   static displayName = ChangeData.name;
@@ -18,7 +19,7 @@ export class ChangeData extends Component {
   componentDidMount() {
     this.populateData();
   }
-  addProduct(){
+  async addProduct(){
     // alert(this.state.product.imageUrl);
     const data = {
       method: 'POST',
@@ -34,8 +35,9 @@ export class ChangeData extends Component {
        body: JSON.stringify(this.state.product)
     };
     console.log(data);
-    fetch('product/PostProduct',data);
-    this.populateData();
+    await fetch('product/PostProduct',data);
+    window.location.reload();
+    
   }
   changeName(event){
     // this.setState({...this.state.product,mame: event.target.value});
@@ -86,49 +88,10 @@ export class ChangeData extends Component {
     return (
       <div className='bg-dark'>
         {forecasts.map(forecast =>
-            <div className='card d-inline-flex m-1 p-2 font-monospace' key={forecast.id}>
-              {/* <td>{forecast.id}</td> */}
-              {/* <div className='card d-inline-flex m-1 p-2 font-monospace'> */}
-              {/* <img className='card-img-top'></img> */}
-              <input className='form-control m-1' defaultValue={forecast.name}></input>
-              <input className='form-control m-1' type='number' defaultValue={forecast.price}></input>
-              <input className='form-control m-1'  onChange={this.changeHeader} defaultValue={forecast.header}></input>
-              <input className='form-control m-1' defaultValue={forecast.description}></input>
-              <input className='form-control m-1' defaultValue={forecast.imageUrl}></input>
-              <button className='btn btn-outline-primary'>Edit</button>
-
-              {/* </div> */}
-              
-            </div>
+            <Product product={forecast} key={forecast.id}></Product>
           )}
-
-
-
       </div>
-      // <table className="table table-striped" aria-labelledby="tableLabel">
-      //   <thead>
-      //     <tr>
-      //     <th>Id</th>
-      //       <th>Name</th>
-      //       <th>Price</th>
-      //       <th>Header</th>
-      //       <th>Discript</th>
-      //       <th>ImageUrl</th>
-      //     </tr>
-      //   </thead>
-      //   <tbody>
-      //     {forecasts.map(forecast =>
-      //       <tr key={forecast.id}>
-      //         <td>{forecast.id}</td>
-      //         <td>{forecast.name}</td>
-      //         <td>{forecast.price}</td>
-      //         <td>{forecast.header}</td>
-      //         <td>{forecast.description}</td>
-      //         <td>{forecast.imageUrl}</td>
-      //       </tr>
-      //     )}
-      //   </tbody>
-      // </table>
+     
     );
   }
 
@@ -139,6 +102,8 @@ export class ChangeData extends Component {
 
     return (
       <div className='row'>
+        <h1>Add and Change Products</h1>
+        <p>This component demonstrates fetching data from the server.</p>
         <div className='card  d-inline-block m-1 p-2 font-monospace'>
           <label>Name</label>
           <input className='form-control' onChange={this.changeName} value={this.state.product.name} name='name'></input>
@@ -150,7 +115,10 @@ export class ChangeData extends Component {
           <input className='form-control' onChange={this.changeDescript} value={this.state.product.description} name ='dscr'></input>
           <label>ImgUrl</label>
           <input className='form-control' onChange={this.changeUrl} value={this.state.product.imageUrl} name ='url'></input>
-          <button className='btn btn-outline-primary' onClick={this.addProduct}>Add</button>
+          <div className='w-100 d-flex justify-content-center'>
+          <button className='btn btn-outline-primary m-3 w-50' onClick={this.addProduct}>Add</button>
+          </div>
+          
         </div>
         {contents}
       </div>
