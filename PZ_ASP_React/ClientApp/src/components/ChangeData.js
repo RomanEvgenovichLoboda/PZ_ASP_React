@@ -121,7 +121,7 @@ export class ChangeData extends Component {
       <div className='row'>
         <h1>Add and Change Products</h1>
         <p>This component demonstrates fetching data from the server.</p>
-        <div className='card m-1 p-2 font-monospace'>
+        <div className='card m-1 p-2 shadow font-monospace'>
           <label>Name</label>
           <input className='form-control' onChange={this.changeName} value={this.state.product.name} name='name'></input>
           <label>Price</label>
@@ -138,7 +138,7 @@ export class ChangeData extends Component {
           
         </div>
         <div className='w-100 d-flex justify-content-center m-3'>
-            <input onChange={this.search} id='srch' className=' form-control w-75' placeholder='Search By Name'></input>
+            <input onChange={this.search} id='srch' className=' shadow form-control w-75' placeholder='Search By Name'></input>
           </div>
         {contents}
       </div>

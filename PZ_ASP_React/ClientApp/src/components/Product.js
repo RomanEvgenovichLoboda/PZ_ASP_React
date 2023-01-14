@@ -14,11 +14,11 @@ export class Product extends Component{
     update(){
         this.state = { product: {     
             id: this.state.product.id,
-            name: document.getElementById('nm').value, // update the value of specific key
-            price: document.getElementById('pc').value,
-            header: document.getElementById('hr').value,
-            description: document.getElementById('dn').value,
-            imageUrl: document.getElementById('url').value
+            name: document.getElementById('nm'+this.state.product.id).value, // update the value of specific key
+            price: document.getElementById('pc'+this.state.product.id).value,
+            header: document.getElementById('hr'+this.state.product.id).value,
+            description: document.getElementById('dn'+this.state.product.id).value,
+            imageUrl: document.getElementById('url'+this.state.product.id).value
         }};
         console.log(this.state.product);
         const data = {
@@ -37,12 +37,12 @@ export class Product extends Component{
 
     render(){
         return(
-            <div className='card d-inline-flex m-1 p-2 font-monospace'>
-                <input id='nm' className='form-control m-1' defaultValue={this.state.product.name}></input>
-                <input id='pc' className='form-control m-1' type='number' defaultValue={this.state.product.price}></input>
-                <input id='hr' className='form-control m-1'  onChange={this.changeHeader} defaultValue={this.state.product.header}></input>
-                <input id='dn' className='form-control m-1' defaultValue={this.state.product.description}></input>
-                <input id='url' className='form-control m-1' defaultValue={this.state.product.imageUrl}></input>
+            <div className='card d-inline-flex m-1 p-2 shadow font-monospace'>
+                <input id={'nm'+this.state.product.id} className='form-control m-1' defaultValue={this.state.product.name}></input>
+                <input id={'pc'+this.state.product.id} className='form-control m-1' type='number' defaultValue={this.state.product.price}></input>
+                <input id={'hr'+this.state.product.id} className='form-control m-1'  onChange={this.changeHeader} defaultValue={this.state.product.header}></input>
+                <input id={'dn'+this.state.product.id} className='form-control m-1' defaultValue={this.state.product.description}></input>
+                <input id={'url'+this.state.product.id} className='form-control m-1' defaultValue={this.state.product.imageUrl}></input>
                 <button onClick={this.update} className='btn btn-outline-primary mt-2'>Edit</button>
                 <button onClick={this.dellete} className='btn btn-outline-danger mt-2'>Dell</button>
 

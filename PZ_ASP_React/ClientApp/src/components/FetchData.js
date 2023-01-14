@@ -52,8 +52,8 @@ export class FetchData extends Component {
     return (
       <div>
         <h1>Products</h1>
-        <div className='w-100 d-flex justify-content-center m-3'>
-          <input onChange={this.search} id='srch' className=' form-control w-75' placeholder='Search By Name'></input>
+        <div className='w-100 d-flex s justify-content-center m-3'>
+          <input onChange={this.search} id='srch' className=' form-control w-75 shadow' placeholder='Search By Name'></input>
         </div>
         
         {contents}
